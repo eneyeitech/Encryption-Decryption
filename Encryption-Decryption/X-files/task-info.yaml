@@ -117,6 +117,12 @@ files:
         }
     }
   learner_created: false
+- name: output.txt
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/46/stages/249/implement#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: Congratulations!
+  time: Wed, 16 Mar 2022 09:46:12 UTC
 record: -1
