@@ -5,12 +5,13 @@ public class Main {
 
         java.util.Scanner sc = new java.util.Scanner(System.in);
 
-        String st = sc.nextLine();
+        String decider = sc.nextLine();
+        String input = sc.nextLine();
         int key = sc.nextInt();
 
-        StringBuilder sb = new StringBuilder(st);
+        StringBuilder sb = new StringBuilder(input);
 
-        sb = encrypt(sb, key);
+        sb = "enc".equals(decider) ? encrypt(sb, key) : decrypt(sb, key);
 
         System.out.println(sb);
     }
@@ -19,15 +20,18 @@ public class Main {
 
         for (int i = 0; i < sb.length(); i++) {
 
-            if (sb.charAt(i) >= 'a' && sb.charAt(i) <= 'z') {
+            char c = (char) (sb.charAt(i) + key);
+            sb.replace(i, i + 1, String.valueOf(c));
+        }
+        return sb;
+    }
 
-                char c = (char) ((sb.charAt(i) + key) % 122);
+    static StringBuilder decrypt(StringBuilder sb, int key) {
 
-                if (c < 'a') {
-                    c += 96;
-                }
-                sb.replace(i, i + 1, String.valueOf(c));
-            }
+        for (int i = 0; i < sb.length(); i++) {
+
+            char c = (char) (sb.charAt(i) - key);
+            sb.replace(i, i + 1, String.valueOf(c));
         }
         return sb;
     }
