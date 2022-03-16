@@ -3,17 +3,38 @@ package encryptdecrypt;
 public class Main {
     public static void main(String[] args) {
 
-        java.util.Scanner sc = new java.util.Scanner(System.in);
+        String mode = "enc";
+        int key = 0;
+        StringBuilder data = new StringBuilder("");
 
-        String decider = sc.nextLine();
-        String input = sc.nextLine();
-        int key = sc.nextInt();
+        for (int i = 0; i < args.length; i++) {
 
-        StringBuilder sb = new StringBuilder(input);
+            switch (args[i]) {
 
-        sb = "enc".equals(decider) ? encrypt(sb, key) : decrypt(sb, key);
+                case "-mode" :
+                    mode = args[i + 1];
+                    i += 1;
+                    break;
 
-        System.out.println(sb);
+                case "-key" :
+                    key = Integer.valueOf(args[i + 1]);
+                    i += 1;
+                    break;
+
+                case "-data" :
+                    data.append(args[i + 1]);
+                    i += 1;
+                    break;
+            }
+        }
+
+        if ("enc".equals(mode)) {
+            encrypt(data, key);
+        } else {
+            decrypt(data, key);
+        }
+
+        System.out.println(data);
     }
 
     static StringBuilder encrypt(StringBuilder sb, int key) {
